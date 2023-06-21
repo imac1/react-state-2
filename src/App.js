@@ -17,25 +17,23 @@ class Container extends React.Component {
       mode: "light"
     };
 
-    this.handleLightMode = this.handleLightMode.bind(this);
-    this.handleDarkMode = this.handleDarkMode.bind(this);
+    this.handleModes = this.handleModes.bind(this);
+    
   }
-  handleLightMode() {
-    this.setState({ mode: "light" });
+  handleModes() {
+    this.setState((prevState) => ({
+      mode: prevState.mode === "light" ? "dark" : "light"
+    }));
   }
-  handleDarkMode() {
-    this.setState({ mode: "dark" });
-  }
+  
+
   render() {
     const { mode } = this.state;
 
     return (
-      <main className={mode}>
-        {mode === "light" ? (
-          <button onClick={this.handleDarkMode}>Activate Dark Mode</button>
-        ) : (
-          <button onClick={this.handleLightMode}>Activate Light Mode</button>
-        )}
+      <main className={mode}>{
+        <button onClick={this.handleModes}>{mode === "light" ? "Activate Dark Mode" : "Activate Light Mode"}</button>
+      }
       </main>
     );
   }
