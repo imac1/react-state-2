@@ -1,12 +1,3 @@
-/*
-  Instructions
-    Instead of having multiple methods to toggle "mode", create a single
-    handleToggleMode method that is responsible for toggling
-    the "mode".
-
-    Also, render a single <button> instead of two.
-*/
-
 import * as React from "react";
 
 class Container extends React.Component {
@@ -17,23 +8,21 @@ class Container extends React.Component {
       mode: "light"
     };
 
-    this.handleModes = this.handleModes.bind(this);
-    
+    this.handleToggleMode = this.handleToggleMode.bind(this);
   }
-  handleModes() {
-    this.setState((prevState) => ({
-      mode: prevState.mode === "light" ? "dark" : "light"
+  handleToggleMode() {
+    this.setState(({ mode }) => ({
+      mode: mode === "light" ? "dark" : "light"
     }));
   }
-  
-
   render() {
     const { mode } = this.state;
 
     return (
-      <main className={mode}>{
-        <button onClick={this.handleModes}>{mode === "light" ? "Activate Dark Mode" : "Activate Light Mode"}</button>
-      }
+      <main className={mode}>
+        <button onClick={this.handleToggleMode}>
+          {mode === "light" ? "Activate Dark Mode" : "Activate Light Mode"}
+        </button>
       </main>
     );
   }
